@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+	# get <url>, to '<controller_name>#<action_name>'
   	get 'hello_rails', to: 'application#hello_rails'
 
   	get 'users_list', to: 'users#users_list'
