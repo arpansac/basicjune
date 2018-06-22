@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   	# another action which will render the file views/users/users_list.html.erb into the browser
 	def users_list
 
-
+		@users = User.all
 		@my_variable = 'something something else'
 
 		# return render html: "something something"
