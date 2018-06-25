@@ -1,6 +1,9 @@
 <h1>Create New Post</h1>
 
 
+<!-- this is an html form to create a post in the database -->
+<!-- action means which route are we sending the data to and method helps routes.rb figure out the correct controller to reach out to -->
+<!-- 
 <form action="/posts" method="post">
 
 	<label for="title">Title</label>
@@ -15,4 +18,36 @@
 	<input type="submit">
 
 
-</form>
+</form> -->
+
+
+<%= form_for @post do |f| %>
+
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+
+	<br>
+
+	<%= f.label :content %>
+	<%= f.text_field :content %>
+	<br>
+
+	<%= f.submit %>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

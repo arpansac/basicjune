@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   # this is the parent controller for all the other controllers we will make
 
   # name of the file and the class are related, should be exactly like they are here

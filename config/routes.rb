@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
-
+  patch 'posts/:id', to: 'posts#update', as: :post
   
+
+
+  get 'posts/:id/edit', to: 'posts#edit'
   get 'posts/new', to: 'posts#new'
   get 'posts', to: 'posts#index'
   post 'posts', to: 'posts#create'
