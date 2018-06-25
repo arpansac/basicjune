@@ -2,7 +2,7 @@
 <p>Find me in app/views/posts/index.html.erb</p>
 
 <ul>
-<% @posts.each do |p| %>
+<% @posts.reverse.each do |p| %>
 
 <li>
 	<h4><%= p.title %></h4>
