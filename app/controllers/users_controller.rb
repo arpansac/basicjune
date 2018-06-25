@@ -31,6 +31,38 @@ class UsersController < ApplicationController
 	end
 
 
+	def edit
+		@user = User.find(params[:id])
+	end
+
+
+	def update
+		@user = User.find(params[:id])
+		@user.update(
+				email: params[:user][:email],
+				password: params[:user][:password],
+				name: params[:user][:name],
+				age: params[:user][:age]
+			)
+
+		redirect_to action: 'index'
+	end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 end

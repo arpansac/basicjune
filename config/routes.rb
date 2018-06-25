@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 # USERS CONTROLLER ROUTES
+  
+  get 'users/:id/edit', to: 'users#edit'
+  patch 'users/:id', to: 'users#update', as: :user
   get 'users', to: 'users#index'
   get 'users/new', to: 'users#new'
   post 'users', to: 'users#create'
