@@ -4,12 +4,40 @@ class UsersController < ApplicationController
   # UsersController
 
   	# another action which will render the file views/users/users_list.html.erb into the browser
-	def users_list
+	def index
 
 		@users = User.all
-		@my_variable = 'something something else'
 
 		# return render html: "something something"
 	end
 
+	# we need 2 actions to create a user
+
+	# this new is used to render a form to create a user
+	def new
+		@user = User.new
+	end
+
+	# create is used to receive data from the form and create a user in the database table
+	def create
+		User.create(
+				email: params[:user][:email],
+				password: params[:user][:password],
+				name: params[:user][:name],
+				age: params[:user][:age]
+			)
+
+		redirect_to action: 'index'
+	end
+
+
+
+
 end
+
+
+
+
+
+
+

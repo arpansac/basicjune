@@ -5,22 +5,12 @@
 
 
 <!-- printing a class variable [data sent from controller] -->
-<%= @my_variable %>
-<%= @my_variable %>
-<%= @my_variable %>
-<%= @my_variable %>
-<%= @my_variable %>
 
 
-<% (0..100).each do |number| %>
 
-<br><%= number %>
-
-<% end %>
-
-
-<% @users.each do |u| %>
+<% @users.reverse.each do |u| %>
 <%= u.name %>
+<br>
 <% end %>
 
 
