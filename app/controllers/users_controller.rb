@@ -1,31 +1,22 @@
 class UsersController < ApplicationController
-  # name of the file and the class are related, should be exactly like they are here
-  # users_controller.rb
-  # UsersController
-
-  	# another action which will render the file views/users/users_list.html.erb into the browser
+  
 	def index
 
 		@users = User.all
 
-		# return render html: "something something"
+		if cookies[:user_id]
+			@signed_in_user = User.find(cookies[:user_id])
+		end
+
 	end
 
-	# we need 2 actions to create a user
-
-	# this new is used to render a form to create a user
+	
 	def new
 		@user = User.new
 	end
 
-	# create is used to receive data from the form and create a user in the database table
 	def create
-		User.create(
-				email: params[:user][:email],
-				password: params[:user][:password],
-				name: params[:user][:name],
-				age: params[:user][:age]
-			)
+		User.create(user_params)
 
 		redirect_to action: 'index'
 	end
@@ -38,19 +29,35 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		@user.update(
-				email: params[:user][:email],
-				password: params[:user][:password],
-				name: params[:user][:name],
-				age: params[:user][:age]
-			)
+		@user.update(user_params)
 
 		redirect_to action: 'index'
+	end
+
+	def sign_in
+
+
+	end
+
+	def create_session
+		u = User.find_by(email: params[:email], password: params[:password])
+
+		if (u.blank?)
+			return redirect_to action: 'sign_in'
+		end
+		# set the key user_id in the cookies equal to the found users id
+		cookies[:user_id] = u.id
+		redirect_to action: 'index'
+
 	end
 
 
 
 
+private
+	def user_params
+		params.require(:user).permit(:name, :age, :email)
+	end
 
 
 

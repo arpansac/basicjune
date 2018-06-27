@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  
+  before_action :set_post, only: [:edit, :update, :destroy]
 
   def index
 
@@ -19,30 +19,42 @@ class PostsController < ApplicationController
   	# Post.create(title: params[:title], content: params[:content])
 
   	# rails form helper automatically creates the fields and assigns them name
-  	Post.create(title: params[:post][:title], content: params[:post][:content])
+  	Post.create(post_params)
 
   	redirect_to action: 'index'
   end
 
   # show the page which renders a pre filled form for a specific post
   def edit
-  	@post = Post.find(params[:id])
   end
 
   # receive data and update in database of a specific post
   def update
-  	@post = Post.find(params[:id])
 
-  	@post.update(title: params[:post][:title], content: params[:post][:content])
+  	@post.update(post_params)
 
   	redirect_to action: 'index'
   end
 
 
+  def destroy
 
-  # def something_else
-  # 	render 
-  # end
+    @post.destroy
+
+    redirect_to action: 'index'
+  end
+
+  private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+
+  def post_params
+    return params[:post]
+  end
+  
 end
 
 
