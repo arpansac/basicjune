@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
 		@users = User.all
 
-		if cookies[:user_id]
-			@signed_in_user = User.find(cookies[:user_id])
+		if session[:user_id]
+			@signed_in_user = User.find(session[:user_id])
 		end
 
 	end
@@ -46,11 +46,22 @@ class UsersController < ApplicationController
 			return redirect_to action: 'sign_in'
 		end
 		# set the key user_id in the cookies equal to the found users id
-		cookies[:user_id] = u.id
+
+		# instead of cookies, we use session because session is encrypted and hence, safer
+		session[:user_id] = u.id
 		redirect_to action: 'index'
 
 	end
 
+
+	def sign_out
+
+		if !session[:user_id].blank?
+			session.delete(:user_id)
+		end
+
+		redirect_to action: 'index'
+	end
 
 
 
